@@ -1,0 +1,67 @@
+query buscarPropietarioPorTipoDeIdentificacion {
+  description: "buscar propietario por tipo de identificacion"
+  statement:
+      SELECT com.kruger.millas.participantes.Propietario
+          WHERE (tipoIdentificacion == _$TipoIdentificacion)
+}
+
+
+query buscarClientePorTipoDeIdentificacion {
+  description: "buscar Cliente por tipo de identificacion"
+  statement:
+      SELECT com.kruger.millas.participantes.Cliente
+          WHERE (tipoIdentificacion == _$TipoIdentificacion)
+}
+
+query buscarComercioPorTipoDeIdentificacion {
+  description: "buscar Comercio por tipo de identificacion"
+  statement:
+      SELECT com.kruger.millas.participantes.Comercio
+          WHERE (tipoIdentificacion == _$TipoIdentificacion)
+}
+
+query buscarEmisorPorTipoDeIdentificacion {
+  description: "buscar Emisor por tipo de identificacion"
+  statement:
+      SELECT com.kruger.millas.participantes.Emisor
+          WHERE (tipoIdentificacion == _$TipoIdentificacion)
+}
+
+query buscarBilleteraPorPropietario {
+  description: "Seleccionar billetera en base a su propietario"
+  statement:
+      SELECT com.kruger.millas.activos.Billetera
+          WHERE (propietario == _$cedulaPropietario)
+}
+
+query buscarBilleteraConUnSoloBalanceMinimo{
+    description: "test"
+    statement:
+        SELECT com.kruger.millas.activos.Billetera
+            WHERE (valorActual >= _$balance)
+                ORDER BY [propietario ASC]
+}
+
+query buscarBilleteraConUnSoloBalanceMaximo{
+    description: "test"
+    statement:
+        SELECT com.kruger.millas.activos.Billetera
+            WHERE (valorActual <= _$balance)
+                ORDER BY [propietario ASC]
+}
+
+query buscarBilleteraConDosBalancesMinimoMaximoOrdenDescendiente {
+    description: "test"
+    statement:
+        SELECT com.kruger.millas.activos.Billetera
+            WHERE (valorActual >= _$balanceMinimo AND valorActual <= _$balanceMaximo )
+                ORDER BY [propietario DESC]
+}
+
+query buscarBilleteraConDosBalancesMinimoMaximoOrdenAscendiente {
+    description: "test"
+    statement:
+        SELECT com.kruger.millas.activos.Billetera
+            WHERE (valorActual >= _$balanceMinimo AND valorActual <= _$balanceMaximo )
+                ORDER BY [propietario ASC]
+}
